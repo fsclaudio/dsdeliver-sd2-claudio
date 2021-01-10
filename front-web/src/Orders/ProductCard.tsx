@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { formatPrice } from './helpers';
 import { Product } from './Types';
 
@@ -19,7 +20,7 @@ function ProductCard({product, onSelectProduct, isSelectted}: Props){
            <h3 className="order-card-title">
                {product.name}
            </h3>
-           <img 
+           <img
            src={product.imageUri} 
            className="order-card-image" />
            <h3 className="order-card-price">
