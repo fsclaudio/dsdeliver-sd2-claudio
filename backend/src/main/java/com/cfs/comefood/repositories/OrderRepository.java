@@ -1,11 +1,11 @@
-package com.devsuperior.dsdeliver.repositories;
+package com.cfs.comefood.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.devsuperior.dsdeliver.entities.Order;
+import com.cfs.comefood.entities.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 

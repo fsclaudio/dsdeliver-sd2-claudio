@@ -1,4 +1,4 @@
-package com.devsuperior.dsdeliver.config;
+package com.cfs.comefood.config;
 
 import java.util.Arrays;
 

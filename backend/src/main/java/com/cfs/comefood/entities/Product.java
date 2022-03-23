@@ -1,4 +1,4 @@
-package com.devsuperior.dsdeliver.entities;
+package com.cfs.comefood.entities;
 
 import java.io.Serializable;
 

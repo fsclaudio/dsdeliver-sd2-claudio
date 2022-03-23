@@ -1,8 +1,8 @@
-package com.devsuperior.dsdeliver.dto;
+package com.cfs.comefood.dto;
 
 import java.io.Serializable;
 
-import com.devsuperior.dsdeliver.entities.Product;
+import com.cfs.comefood.entities.Product;
 
 public class ProductDTO implements Serializable {
 	

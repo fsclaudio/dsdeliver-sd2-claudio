@@ -1,20 +1,25 @@
-package com.devsuperior.dsdeliver.services;
+package com.cfs.comefood.services;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.dsdeliver.dto.OrderDTO;
-import com.devsuperior.dsdeliver.dto.ProductDTO;
-import com.devsuperior.dsdeliver.entities.Order;
-import com.devsuperior.dsdeliver.entities.OrderStatus;
-import com.devsuperior.dsdeliver.entities.Product;
-import com.devsuperior.dsdeliver.repositories.OrderRepository;
-import com.devsuperior.dsdeliver.repositories.ProductRepository;
+import com.cfs.comefood.dto.OrderDTO;
+import com.cfs.comefood.dto.ProductDTO;
+import com.cfs.comefood.entities.Order;
+import com.cfs.comefood.entities.OrderStatus;
+import com.cfs.comefood.entities.Product;
+import com.cfs.comefood.exceptions.DatabaseException;
+import com.cfs.comefood.exceptions.ResourceNotFoundException;
+import com.cfs.comefood.repositories.OrderRepository;
+import com.cfs.comefood.repositories.ProductRepository;
+
 
 @Service
 public class OrderService {
@@ -41,6 +46,27 @@ public class OrderService {
 		}
 		order = repository.save(order);
 		return new OrderDTO(order);
+	}
+	
+	@Transactional(readOnly = true)
+	public OrderDTO findById(Long id) {
+		Order order = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Id not found " + id));
+		return new OrderDTO(order);	
+	}
+	
+	@Transactional
+	public void deleteById(Long id) {
+		try {
+			repository.deleteById(id);
+			}
+			catch (EmptyResultDataAccessException e) {
+				throw new ResourceNotFoundException("Id not found! " +id);
+			}
+			
+			catch (DataIntegrityViolationException e) {
+				throw new DatabaseException("Integrity Violation");
+			}
 	}
 	
 	@Transactional
